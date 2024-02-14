@@ -1,15 +1,15 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import creational.singleton.FlowerShop;
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        FlowerShop flowerShop = FlowerShop.getInstance();
+        FlowerShop flowerShop2 = FlowerShop.getInstance();
+        System.out.println(flowerShop.getName());
+        System.out.println(flowerShop.getLocation());
+        System.out.println(flowerShop2.getLocation());
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        flowerShop2.setLocation("вул. Головна, 4Б");
+        System.out.println(flowerShop.getLocation());
+        System.out.println(flowerShop2.getLocation());
+        System.out.println(flowerShop.equals(flowerShop2));
     }
 }
