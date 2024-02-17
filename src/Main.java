@@ -1,3 +1,4 @@
+import creational.builder.Bouquet;
 import creational.factory.FLowerTypeFactory;
 import creational.factory.Flower;
 import creational.factory.FlowerType;
@@ -64,5 +65,18 @@ public class Main {
             flower.dry();
         });
         System.out.println(" >> Abstract factory end");
+        System.out.println();
+        System.out.println(" >> Builder start");
+        Bouquet bouquet = new Bouquet.BouquetBuilder()
+                .setFlowers(true)
+                .setRibbon(true)
+                .setPaper(true)
+                .setDecor(false)
+                .setSponge(false)
+                .setBasket(false)
+                .build();
+        System.out.println(bouquet.toString());
+        System.out.println(" >> Builder end");
+        System.out.println();
     }
 }
