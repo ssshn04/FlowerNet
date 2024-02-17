@@ -5,6 +5,7 @@ import creational.factory.FlowerType;
 import creational.factory.abst.FlowerShopFactory;
 import creational.factory.abst.FlowerTypeFactoryType;
 import creational.factory.method.FlowerFactory;
+import creational.prototype.Bloom;
 import creational.singleton.FlowerShop;
 
 import java.util.ArrayList;
@@ -45,11 +46,11 @@ public class Main {
 
         System.out.println(" >> Abstract factory start");
         FlowerShopFactory flowerShopFactory = new FlowerShopFactory();
-        FLowerTypeFactory fLowerFactory = flowerShopFactory.growFlowerFactory(FlowerTypeFactoryType.FLOWER);
+        FLowerTypeFactory flowerFactory1 = flowerShopFactory.growFlowerFactory(FlowerTypeFactoryType.FLOWER);
         FLowerTypeFactory plantFactory = flowerShopFactory.growFlowerFactory(FlowerTypeFactoryType.PLANT);
-        Flower tulip1 = flowerFactory.growFlower(FlowerType.TULIP);
-        Flower rose1 = flowerFactory.growFlower(FlowerType.ROSE);
-        Flower dahlia1 = flowerFactory.growFlower(FlowerType.DAHLIA);
+        Flower tulip1 = flowerFactory1.growFlower(FlowerType.TULIP);
+        Flower rose1 = flowerFactory1.growFlower(FlowerType.ROSE);
+        Flower dahlia1 = flowerFactory1.growFlower(FlowerType.DAHLIA);
         Flower aloe = plantFactory.growFlower(FlowerType.ALOE_PLANT);
         Flower calathea = plantFactory.growFlower(FlowerType.CALATHEA_PLANT);
         Flower monstera = plantFactory.growFlower(FlowerType.MONSTERA_PLANT);
@@ -78,5 +79,15 @@ public class Main {
         System.out.println(bouquet.toString());
         System.out.println(" >> Builder end");
         System.out.println();
+        System.out.println(" >> Prototype start");
+        Bloom flowerD = new Bloom("white", "daisy");
+        Bloom flowerDClone = (Bloom) flowerD.doClone();
+        if (flowerD != flowerDClone) {
+            System.out.println("That's a different flowers :/");
+        }
+        if (flowerD.equals(flowerDClone)){
+            System.out.println("The same flower! Succes!");
+        }
+        System.out.println(" >> Prototype end");
     }
 }
