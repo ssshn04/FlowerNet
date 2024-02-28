@@ -9,6 +9,8 @@ import creational.prototype.Bloom;
 import creational.singleton.FlowerShop;
 import structural.adapter.AudioFile;
 import structural.adapter.AudioToTextAdapter;
+import structural.composite.FlowerComposite;
+import structural.composite.LeafFlower;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,5 +100,16 @@ public class Main {
         String textData = adapter.getData();
         System.out.println("Text data: " + textData);
         System.out.println(" >> Adapter end");
+        System.out.println();
+        System.out.println(" >> Composite start");
+        LeafFlower daisy = new LeafFlower("Daisy");
+        LeafFlower lily = new LeafFlower("Lily");
+        FlowerComposite composite = new FlowerComposite("Bouquet");
+        composite.addComponent(daisy);
+        composite.addComponent(lily);
+        daisy.display();
+        lily.display();
+        composite.display();
+        System.out.println(" >> Composite end");
     }
 }
