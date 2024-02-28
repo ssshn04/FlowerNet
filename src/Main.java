@@ -11,6 +11,8 @@ import structural.adapter.AudioFile;
 import structural.adapter.AudioToTextAdapter;
 import structural.composite.FlowerComposite;
 import structural.composite.LeafFlower;
+import structural.proxy.OnlineOrder;
+import structural.proxy.ShopOrderProxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,5 +113,12 @@ public class Main {
         lily.display();
         composite.display();
         System.out.println(" >> Composite end");
+        System.out.println();
+        System.out.println(" >> Proxy start");
+        ShopOrderProxy shopOrderProxy = new ShopOrderProxy();
+        OnlineOrder onlineOrder = new OnlineOrder();
+        onlineOrder.makeOrder();
+        shopOrderProxy.makeOrder();
+        System.out.println(" >> Proxy end");
     }
 }
