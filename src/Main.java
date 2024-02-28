@@ -7,6 +7,8 @@ import creational.factory.abst.FlowerTypeFactoryType;
 import creational.factory.method.FlowerFactory;
 import creational.prototype.Bloom;
 import creational.singleton.FlowerShop;
+import structural.adapter.AudioFile;
+import structural.adapter.AudioToTextAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +85,18 @@ public class Main {
         Bloom flowerD = new Bloom("white", "daisy");
         Bloom flowerDClone = (Bloom) flowerD.doClone();
         if (flowerD != flowerDClone) {
-            System.out.println("That's a different flowers :/");
+            System.out.println("That's a different flowers as obj:/");
         }
         if (flowerD.equals(flowerDClone)){
-            System.out.println("The same flower! Succes!");
+            System.out.println("The same flower type! Success!");
         }
         System.out.println(" >> Prototype end");
+        System.out.println();
+        System.out.println(" >> Adapter start");
+        AudioFile mp3File = new AudioFile("MP3 audio data");
+        AudioToTextAdapter adapter = new AudioToTextAdapter(mp3File);
+        String textData = adapter.getData();
+        System.out.println("Text data: " + textData);
+        System.out.println(" >> Adapter end");
     }
 }
