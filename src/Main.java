@@ -11,6 +11,8 @@ import structural.adapter.AudioFile;
 import structural.adapter.AudioToTextAdapter;
 import structural.composite.FlowerComposite;
 import structural.composite.LeafFlower;
+import structural.flyweight.Flyweight;
+import structural.flyweight.FlyweightFactory;
 import structural.proxy.OnlineOrder;
 import structural.proxy.ShopOrderProxy;
 
@@ -120,5 +122,15 @@ public class Main {
         onlineOrder.makeOrder();
         shopOrderProxy.makeOrder();
         System.out.println(" >> Proxy end");
+        System.out.println();
+        System.out.println(" >> Flyweight start");
+        FlyweightFactory flyweightFactory = FlyweightFactory.getInstance();
+        for (int i = 0; i < 2; i++) {
+            Flyweight rose2 = flyweightFactory.getFlower("rose", "red", 10);
+            rose2.display();
+            Flyweight tulip2 = flyweightFactory.getFlower("tulip", "yellow", 8);
+            tulip2.display();
+        }
+        System.out.println(" >> Flyweight end");
     }
 }
