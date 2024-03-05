@@ -11,6 +11,10 @@ import structural.adapter.AudioFile;
 import structural.adapter.AudioToTextAdapter;
 import structural.composite.FlowerComposite;
 import structural.composite.LeafFlower;
+import structural.facade.DeliveryOrder;
+import structural.facade.MakeBouquet;
+import structural.facade.ShopAssistent;
+import structural.facade.TakeOrder;
 import structural.flyweight.Flyweight;
 import structural.flyweight.FlyweightFactory;
 import structural.proxy.OnlineOrder;
@@ -117,10 +121,10 @@ public class Main {
         System.out.println(" >> Composite end");
         System.out.println();
         System.out.println(" >> Proxy start");
-        ShopOrderProxy shopOrderProxy = new ShopOrderProxy();
-        OnlineOrder onlineOrder = new OnlineOrder();
-        onlineOrder.makeOrder();
-        shopOrderProxy.makeOrder();
+//        ShopOrderProxy shopOrderProxy = new ShopOrderProxy();
+//        OnlineOrder onlineOrder = new OnlineOrder();
+//        onlineOrder.makeOrder();
+//        shopOrderProxy.makeOrder();
         System.out.println(" >> Proxy end");
         System.out.println();
         System.out.println(" >> Flyweight start");
@@ -132,5 +136,14 @@ public class Main {
             tulip2.display();
         }
         System.out.println(" >> Flyweight end");
+        System.out.println();
+        System.out.println(" >> Facade start");
+        var takeOrder = new TakeOrder();
+        var makeBouquet = new MakeBouquet();
+        var deliveryOrder = new DeliveryOrder();
+        var shopAssistent = new ShopAssistent(takeOrder, makeBouquet, deliveryOrder);
+        System.out.println(shopAssistent.workDay());
+        System.out.println(" >> Facade end");
+        System.out.println();
     }
 }
