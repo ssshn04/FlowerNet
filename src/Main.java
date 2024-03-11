@@ -15,6 +15,7 @@ import structural.bridge.Reyna;
 import structural.bridge.RunItBack;
 import structural.composite.FlowerComposite;
 import structural.composite.LeafFlower;
+import structural.decorator.*;
 import structural.facade.DeliveryOrder;
 import structural.facade.MakeBouquet;
 import structural.facade.ShopAssistent;
@@ -160,5 +161,12 @@ public class Main {
         ultimatePhoenix.flash();
         System.out.println(" >> Bridge end");
         System.out.println();
+        System.out.println(" >> Decorator start");
+        Agent agent = new Viper();
+        agent = new CloudDecorator(agent);
+        agent = new ScreenDecorator(agent);
+        agent = new UltiDecorator(agent);
+        agent.describe();
+        System.out.println(" >> Decorator end");
     }
 }
