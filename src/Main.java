@@ -9,6 +9,10 @@ import creational.prototype.Bloom;
 import creational.singleton.FlowerShop;
 import structural.adapter.AudioFile;
 import structural.adapter.AudioToTextAdapter;
+import structural.bridge.Empress;
+import structural.bridge.Phoenix;
+import structural.bridge.Reyna;
+import structural.bridge.RunItBack;
 import structural.composite.FlowerComposite;
 import structural.composite.LeafFlower;
 import structural.facade.DeliveryOrder;
@@ -144,6 +148,17 @@ public class Main {
         var shopAssistent = new ShopAssistent(takeOrder, makeBouquet, deliveryOrder);
         System.out.println(shopAssistent.workDay());
         System.out.println(" >> Facade end");
+        System.out.println();
+        System.out.println(" >> Bridge start");
+        System.out.println("Reyna used the ultimate!");
+        var ultimateReyna = new Reyna(new Empress());
+        ultimateReyna.heal();
+        ultimateReyna.flash();
+        System.out.println("Phoenix used the ultimate!");
+        var ultimatePhoenix = new Phoenix(new RunItBack());
+        ultimatePhoenix.heal();
+        ultimatePhoenix.flash();
+        System.out.println(" >> Bridge end");
         System.out.println();
     }
 }
