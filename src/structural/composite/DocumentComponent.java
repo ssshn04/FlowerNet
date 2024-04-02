@@ -1,5 +1,5 @@
 package structural.composite;
 
-public interface FlowerComponent {
+public interface DocumentComponent {
     void display();
 }

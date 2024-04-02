@@ -13,8 +13,10 @@ import structural.bridge.Empress;
 import structural.bridge.Phoenix;
 import structural.bridge.Reyna;
 import structural.bridge.RunItBack;
-import structural.composite.FlowerComposite;
-import structural.composite.LeafFlower;
+import structural.composite.DocumentComponent;
+import structural.composite.Folder;
+import structural.composite.Receipt;
+import structural.composite.SalesReport;
 import structural.decorator.*;
 import structural.facade.DeliveryOrder;
 import structural.facade.MakeBouquet;
@@ -22,12 +24,11 @@ import structural.facade.ShopAssistent;
 import structural.facade.TakeOrder;
 import structural.flyweight.Flyweight;
 import structural.flyweight.FlyweightFactory;
-import structural.proxy.OnlineOrder;
-import structural.proxy.ShopOrderProxy;
+import structural.proxy.LocalWarehouseProxy;
+import structural.proxy.Warehouse;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Main {
     public static void main(String[] args) {
@@ -84,6 +85,7 @@ public class Main {
         });
         System.out.println(" >> Abstract factory end");
         System.out.println();
+
         System.out.println(" >> Builder start");
         Bouquet bouquet = new Bouquet.BouquetBuilder()
                 .setFlowers(true)
@@ -96,6 +98,7 @@ public class Main {
         System.out.println(bouquet.toString());
         System.out.println(" >> Builder end");
         System.out.println();
+
         System.out.println(" >> Prototype start");
         Bloom flowerD = new Bloom("white", "daisy");
         Bloom flowerDClone = (Bloom) flowerD.doClone();
@@ -107,31 +110,46 @@ public class Main {
         }
         System.out.println(" >> Prototype end");
         System.out.println();
+
+        // ------------------------------- structural ----------------------------------
         System.out.println(" >> Adapter start");
         AudioFile mp3File = new AudioFile("MP3 audio data");
         AudioToTextAdapter adapter = new AudioToTextAdapter(mp3File);
         String textData = adapter.getData();
         System.out.println("Text data: " + textData);
         System.out.println(" >> Adapter end");
+
         System.out.println();
         System.out.println(" >> Composite start");
-        LeafFlower daisy = new LeafFlower("Daisy");
-        LeafFlower lily = new LeafFlower("Lily");
-        FlowerComposite composite = new FlowerComposite("Bouquet");
-        composite.addComponent(daisy);
-        composite.addComponent(lily);
-        daisy.display();
-        lily.display();
-        composite.display();
+        DocumentComponent salesReport1 = new SalesReport("2024-02-10");
+        DocumentComponent salesReport2 = new SalesReport("2024-02-11");
+        DocumentComponent receipt1 = new Receipt(1001, 50.25);
+        DocumentComponent receipt2 = new Receipt(1002, 35.75);
+
+        Folder rootFolder = new Folder();
+        rootFolder.addComponent(salesReport1);
+        rootFolder.addComponent(salesReport2);
+
+        Folder salesFolder = new Folder();
+        salesFolder.addComponent(receipt1);
+        salesFolder.addComponent(receipt2);
+
+        rootFolder.addComponent(salesFolder);
+
+        rootFolder.display();
         System.out.println(" >> Composite end");
         System.out.println();
+
         System.out.println(" >> Proxy start");
-//        ShopOrderProxy shopOrderProxy = new ShopOrderProxy();
-//        OnlineOrder onlineOrder = new OnlineOrder();
-//        onlineOrder.makeOrder();
-//        shopOrderProxy.makeOrder();
+        Warehouse owner = new LocalWarehouseProxy(true);
+        owner.fullNow();
+
+        Warehouse employee = new LocalWarehouseProxy(false);
+        employee.fullNow();
+
         System.out.println(" >> Proxy end");
         System.out.println();
+
         System.out.println(" >> Flyweight start");
         FlyweightFactory flyweightFactory = FlyweightFactory.getInstance();
         for (int i = 0; i < 2; i++) {
@@ -142,6 +160,7 @@ public class Main {
         }
         System.out.println(" >> Flyweight end");
         System.out.println();
+
         System.out.println(" >> Facade start");
         var takeOrder = new TakeOrder();
         var makeBouquet = new MakeBouquet();
@@ -150,6 +169,7 @@ public class Main {
         System.out.println(shopAssistent.workDay());
         System.out.println(" >> Facade end");
         System.out.println();
+
         System.out.println(" >> Bridge start");
         System.out.println("Reyna used the ultimate!");
         var ultimateReyna = new Reyna(new Empress());
@@ -161,6 +181,7 @@ public class Main {
         ultimatePhoenix.flash();
         System.out.println(" >> Bridge end");
         System.out.println();
+
         System.out.println(" >> Decorator start");
         Agent agent = new Viper();
         agent = new CloudDecorator(agent);
@@ -168,5 +189,8 @@ public class Main {
         agent = new UltiDecorator(agent);
         agent.describe();
         System.out.println(" >> Decorator end");
+        System.out.println();
+
+        // ------------------------------- behavioral ----------------------------------
     }
 }
