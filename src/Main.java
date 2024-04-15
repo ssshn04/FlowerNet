@@ -1,3 +1,4 @@
+import behavioral.chainOfResponsibility.*;
 import behavioral.mediator.FlowerMediator;
 import behavioral.mediator.Shop;
 import behavioral.template.InStoreOrder;
@@ -209,7 +210,7 @@ public class Main {
 
         System.out.println(" >> Template end");
 
-        System.out.println(" >> Mediator end");
+        System.out.println(" >> Mediator start");
         FlowerMediator mediator = new Shop();
 
         mediator.addStock("Rose", 20);
@@ -222,8 +223,20 @@ public class Main {
 
         System.out.println(" >> Mediator end");
 
-        System.out.println(" >> Mediator end");
-        System.out.println(" >> Mediator end");
+        System.out.println(" >> Chain of Responsibility start");
+
+        BombDeactivationHandler viper = new ViperAgent();
+        BombDeactivationHandler phoenix = new PhoenixAgent();
+        BombDeactivationHandler killjoy = new KilljoyAgent();
+
+        viper.setNextHandler(phoenix);
+        phoenix.setNextHandler(killjoy);
+
+        viper.deactivateBomb(BombLevel.LEVEL_1);
+        viper.deactivateBomb(BombLevel.LEVEL_2);
+        viper.deactivateBomb(BombLevel.LEVEL_3);
+
+        System.out.println(" >> Chain of Responsibility end");
 
     }
 }
