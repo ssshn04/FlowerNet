@@ -1,6 +1,8 @@
 import behavioral.chainOfResponsibility.*;
 import behavioral.mediator.FlowerMediator;
 import behavioral.mediator.Shop;
+import behavioral.observe.GameEventSubject;
+import behavioral.observe.Player;
 import behavioral.template.InStoreOrder;
 import behavioral.template.OnlineOrder;
 import behavioral.template.OrderTemplate;
@@ -237,6 +239,21 @@ public class Main {
         viper.deactivateBomb(BombLevel.LEVEL_3);
 
         System.out.println(" >> Chain of Responsibility end");
+
+        System.out.println(" >> Observer  start");
+
+        GameEventSubject gameEventSubject = new GameEventSubject();
+
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+
+        gameEventSubject.registerObserver(player1);
+        gameEventSubject.registerObserver(player2);
+
+        gameEventSubject.notifyObservers("Player 1 took damage");
+        gameEventSubject.notifyObservers("Player 2 eliminated an enemy");
+
+        System.out.println(" >> Observer  end");
 
     }
 }
