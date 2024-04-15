@@ -1,3 +1,5 @@
+import behavioral.mediator.FlowerMediator;
+import behavioral.mediator.Shop;
 import behavioral.template.InStoreOrder;
 import behavioral.template.OnlineOrder;
 import behavioral.template.OrderTemplate;
@@ -200,10 +202,28 @@ public class Main {
         OrderTemplate online = new OnlineOrder();
         online.processOrder();
 
+        System.out.println();
+
         OrderTemplate inStore = new InStoreOrder();
         inStore.processOrder();
 
         System.out.println(" >> Template end");
+
+        System.out.println(" >> Mediator end");
+        FlowerMediator mediator = new Shop();
+
+        mediator.addStock("Rose", 20);
+        mediator.addStock("Tulip", 15);
+
+        System.out.println();
+
+        mediator.placeOrder("Rose", 10);
+        mediator.placeOrder("Tulip", 20);
+
+        System.out.println(" >> Mediator end");
+
+        System.out.println(" >> Mediator end");
+        System.out.println(" >> Mediator end");
 
     }
 }
