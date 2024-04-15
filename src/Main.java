@@ -1,3 +1,6 @@
+import behavioral.template.InStoreOrder;
+import behavioral.template.OnlineOrder;
+import behavioral.template.OrderTemplate;
 import creational.builder.Bouquet;
 import creational.factory.FLowerTypeFactory;
 import creational.factory.Flower;
@@ -192,5 +195,15 @@ public class Main {
         System.out.println();
 
         // ------------------------------- behavioral ----------------------------------
+        System.out.println(" >> Template start");
+
+        OrderTemplate online = new OnlineOrder();
+        online.processOrder();
+
+        OrderTemplate inStore = new InStoreOrder();
+        inStore.processOrder();
+
+        System.out.println(" >> Template end");
+
     }
 }
