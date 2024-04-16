@@ -3,6 +3,10 @@ import behavioral.mediator.FlowerMediator;
 import behavioral.mediator.Shop;
 import behavioral.observe.GameEventSubject;
 import behavioral.observe.Player;
+import behavioral.stategy.CashPaymentStrategy;
+import behavioral.stategy.CreditCardPaymentStrategy;
+import behavioral.stategy.FlowerPaymentContext;
+import behavioral.stategy.PaymentStrategy;
 import behavioral.template.InStoreOrder;
 import behavioral.template.OnlineOrder;
 import behavioral.template.OrderTemplate;
@@ -254,6 +258,19 @@ public class Main {
         gameEventSubject.notifyObservers("Player 2 eliminated an enemy");
 
         System.out.println(" >> Observer  end");
+
+        System.out.println(" >> Strategy  start");
+        PaymentStrategy cashPaymentStrategy = new CashPaymentStrategy();
+        PaymentStrategy creditCardPaymentStrategy = new CreditCardPaymentStrategy();
+
+        FlowerPaymentContext paymentContext = new FlowerPaymentContext(cashPaymentStrategy);
+
+        paymentContext.payForBouquet(100.0);
+
+        paymentContext.setPaymentStrategy(creditCardPaymentStrategy);
+
+        paymentContext.payForBouquet(150.0);
+        System.out.println(" >> Strategy  end");
 
     }
 }
