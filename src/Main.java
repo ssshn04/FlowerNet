@@ -4,6 +4,10 @@ import behavioral.mediator.FlowerMediator;
 import behavioral.mediator.Shop;
 import behavioral.observe.GameEventSubject;
 import behavioral.observe.Player;
+import behavioral.state.DeadState;
+import behavioral.state.NormalState;
+import behavioral.state.PlayerContext;
+import behavioral.state.UltState;
 import behavioral.stategy.CashPaymentStrategy;
 import behavioral.stategy.CreditCardPaymentStrategy;
 import behavioral.stategy.FlowerPaymentContext;
@@ -291,6 +295,24 @@ public class Main {
         invoker.executeCommand();
 
         System.out.println(" >> Command  end");
+
+        System.out.println(" >> State  start");
+
+        PlayerContext playerContext = new PlayerContext();
+
+        playerContext.setState(new NormalState());
+
+        playerContext.handle();
+
+        playerContext.setState(new UltState());
+
+        playerContext.handle();
+
+        playerContext.setState(new DeadState());
+
+        playerContext.handle();
+
+        System.out.println(" >> State  end");
 
     }
 }
