@@ -1,4 +1,5 @@
 import behavioral.chainOfResponsibility.*;
+import behavioral.command.*;
 import behavioral.mediator.FlowerMediator;
 import behavioral.mediator.Shop;
 import behavioral.observe.GameEventSubject;
@@ -260,6 +261,7 @@ public class Main {
         System.out.println(" >> Observer  end");
 
         System.out.println(" >> Strategy  start");
+
         PaymentStrategy cashPaymentStrategy = new CashPaymentStrategy();
         PaymentStrategy creditCardPaymentStrategy = new CreditCardPaymentStrategy();
 
@@ -270,7 +272,25 @@ public class Main {
         paymentContext.setPaymentStrategy(creditCardPaymentStrategy);
 
         paymentContext.payForBouquet(150.0);
+
         System.out.println(" >> Strategy  end");
+
+        System.out.println(" >> Command  start");
+
+        FlowerOrder flowerOrder = new FlowerOrder();
+
+        Command placeOrderCommand = new PlaceOrderCommand(flowerOrder);
+        Command cancelOrderCommand = new CancelOrderCommand(flowerOrder);
+
+        CommandInvoker invoker = new CommandInvoker();
+
+        invoker.setCommand(placeOrderCommand);
+        invoker.executeCommand();
+
+        invoker.setCommand(cancelOrderCommand);
+        invoker.executeCommand();
+
+        System.out.println(" >> Command  end");
 
     }
 }
