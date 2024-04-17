@@ -1,5 +1,8 @@
 import behavioral.chainOfResponsibility.*;
 import behavioral.command.*;
+import behavioral.iterator.FlowerCollectionIterator;
+import behavioral.iterator.FlowerIterator;
+import behavioral.iterator.Product;
 import behavioral.mediator.FlowerMediator;
 import behavioral.mediator.Shop;
 import behavioral.observe.GameEventSubject;
@@ -338,5 +341,23 @@ public class Main {
         System.out.println(" >> Visitor end");
         System.out.println();
 
+        System.out.println(" >> Iterator end");
+
+        List<Product> products = new ArrayList<>();
+        products.add(new Product("Violets"));
+        products.add(new Product("Lilies"));
+        products.add(new Product("Sunflower"));
+
+        FlowerIterator iterator = new FlowerCollectionIterator(products);
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            System.out.println("Product: " + product.getName());
+        }
+
+        System.out.println(" >> Iterator end");
+        System.out.println();
+
+        System.out.println(" >> Iterator end");
+        System.out.println(" >> Iterator end");
     }
 }
