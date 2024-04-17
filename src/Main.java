@@ -15,6 +15,7 @@ import behavioral.stategy.PaymentStrategy;
 import behavioral.template.InStoreOrder;
 import behavioral.template.OnlineOrder;
 import behavioral.template.OrderTemplate;
+import behavioral.visitor.*;
 import creational.builder.Bouquet;
 import creational.factory.FLowerTypeFactory;
 import creational.factory.Flower;
@@ -220,6 +221,7 @@ public class Main {
         inStore.processOrder();
 
         System.out.println(" >> Template end");
+        System.out.println();
 
         System.out.println(" >> Mediator start");
         FlowerMediator mediator = new Shop();
@@ -233,6 +235,7 @@ public class Main {
         mediator.placeOrder("Tulip", 20);
 
         System.out.println(" >> Mediator end");
+        System.out.println();
 
         System.out.println(" >> Chain of Responsibility start");
 
@@ -248,6 +251,7 @@ public class Main {
         viper.deactivateBomb(BombLevel.LEVEL_3);
 
         System.out.println(" >> Chain of Responsibility end");
+        System.out.println();
 
         System.out.println(" >> Observer  start");
 
@@ -263,6 +267,7 @@ public class Main {
         gameEventSubject.notifyObservers("Player 2 eliminated an enemy");
 
         System.out.println(" >> Observer  end");
+        System.out.println();
 
         System.out.println(" >> Strategy  start");
 
@@ -278,6 +283,7 @@ public class Main {
         paymentContext.payForBouquet(150.0);
 
         System.out.println(" >> Strategy  end");
+        System.out.println();
 
         System.out.println(" >> Command  start");
 
@@ -295,6 +301,7 @@ public class Main {
         invoker.executeCommand();
 
         System.out.println(" >> Command  end");
+        System.out.println();
 
         System.out.println(" >> State  start");
 
@@ -313,6 +320,23 @@ public class Main {
         playerContext.handle();
 
         System.out.println(" >> State  end");
+        System.out.println();
+
+        System.out.println(" >> Visitor start");
+
+        GameAgent jett = new JettAgent();
+        GameAgent gekko = new GekkoAgent();
+
+        Visitor jettVisitor = new JettVisitor();
+        Visitor gekkoVisitor = new GekkoVisitor();
+
+        jett.accept(jettVisitor);
+        jett.accept(gekkoVisitor);
+        gekko.accept(jettVisitor);
+        gekko.accept(gekkoVisitor);
+
+        System.out.println(" >> Visitor end");
+        System.out.println();
 
     }
 }
