@@ -5,6 +5,8 @@ import behavioral.iterator.FlowerIterator;
 import behavioral.iterator.Product;
 import behavioral.mediator.FlowerMediator;
 import behavioral.mediator.Shop;
+import behavioral.memento.Catalog;
+import behavioral.memento.CatalogCareTaker;
 import behavioral.observe.GameEventSubject;
 import behavioral.observe.Player;
 import behavioral.state.DeadState;
@@ -357,7 +359,22 @@ public class Main {
         System.out.println(" >> Iterator end");
         System.out.println();
 
-        System.out.println(" >> Iterator end");
-        System.out.println(" >> Iterator end");
+        System.out.println(" >> Memento start");
+        Catalog catalog = new Catalog();
+
+        catalog.addFlower("Hydrangea");
+        catalog.addFlower("Peonies");
+        catalog.addFlower("Lotus");
+        catalog.printCatalog();
+
+        CatalogCareTaker caretaker = new CatalogCareTaker();
+        caretaker.setMemento(catalog.saveStateToMemento());
+
+        catalog.removeFlower("Hydrangea");
+        catalog.printCatalog();
+
+        catalog.getStateFromMemento(caretaker.getMemento());
+        catalog.printCatalog();
+        System.out.println(" >> Memento end");
     }
 }
